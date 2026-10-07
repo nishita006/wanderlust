@@ -1,0 +1,193 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="categories-wrapper">
+
+    <div class="categories">
+
+        <a
+            href="/listings"
+            class="category-item <%= !selectedCategory ? 'active' : '' %>"
+        >
+            <i class="fa-solid fa-compass"></i>
+            <span>All</span>
+        </a>
+
+        <% categories.forEach(category => { %>
+
+            <a
+                href="/listings?category=<%= encodeURIComponent(category) %>"
+                class="category-item <%= selectedCategory === category ? 'active' : '' %>"
+            >
+
+                <% if(category === "Trending") { %>
+                    <i class="fa-solid fa-fire"></i>
+
+                <% } else if(category === "Rooms") { %>
+                    <i class="fa-solid fa-bed"></i>
+
+                <% } else if(category === "Mountains") { %>
+                    <i class="fa-solid fa-mountain"></i>
+
+                <% } else if(category === "Camping") { %>
+                    <i class="fa-solid fa-campground"></i>
+
+                <% } else if(category === "Pools") { %>
+                    <i class="fa-solid fa-person-swimming"></i>
+
+                <% } else if(category === "Beach") { %>
+                    <i class="fa-solid fa-umbrella-beach"></i>
+
+                <% } else if(category === "Cities") { %>
+                    <i class="fa-solid fa-city"></i>
+
+                <% } else if(category === "Farms") { %>
+                    <i class="fa-solid fa-wheat-awn"></i>
+
+                <% } else if(category === "Arctic") { %>
+                    <i class="fa-solid fa-snowflake"></i>
+
+                <% } else if(category === "Lake") { %>
+                    <i class="fa-solid fa-water"></i>
+
+                <% } else if(category === "Desert") { %>
+                    <i class="fa-solid fa-sun"></i>
+
+                <% } else { %>
+                    <i class="fa-solid fa-tree"></i>
+                <% } %>
+
+                <span><%= category %></span>
+
+            </a>
+
+        <% }) %>
+
+    </div>
+
+</div>
+
+
+<% if(search || selectedCategory) { %>
+
+    <div class="search-result-heading">
+
+        <% if(search) { %>
+            <h4>
+                Search results for:
+                "<%= search %>"
+            </h4>
+        <% } %>
+
+        <% if(selectedCategory) { %>
+            <p class="text-muted mb-0">
+                Category:
+                <b><%= selectedCategory %></b>
+            </p>
+        <% } %>
+
+    </div>
+
+<% } else { %>
+
+    <h3 class="listing-heading">
+        Explore stays
+    </h3>
+
+<% } %>
+
+
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-1 g-4">
+
+    <% if(allListings.length === 0) { %>
+
+        <div class="col-12">
+
+            <div class="empty-state">
+
+                <i class="fa-solid fa-house-circle-xmark"></i>
+
+                <h4>No listings found</h4>
+
+                <p>
+                    Try another destination or category.
+                </p>
+
+                <a
+                    href="/listings"
+                    class="btn btn-dark"
+                >
+                    View all listings
+                </a>
+
+            </div>
+
+        </div>
+
+    <% } %>
+
+
+    <% allListings.forEach(listing => { %>
+
+        <div class="col">
+
+            <a
+                href="/listings/<%= listing._id %>"
+                class="listing-link"
+            >
+
+                <div class="card listing-card">
+
+                    <div class="image-wrapper">
+
+                        <img
+                            src="<%= listing.image?.url || listing.image %>"
+                            class="card-img-top"
+                            alt="<%= listing.title %>"
+                        >
+
+                        <span class="image-location">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <%= listing.location %>
+                        </span>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <h5 class="listing-title">
+                            <%= listing.title %>
+                        </h5>
+
+                        <p class="listing-location">
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            <%= listing.location %>,
+                            <%= listing.country %>
+
+                        </p>
+
+                        <p class="listing-price">
+
+                            <b>
+                                ₹<%= listing.price
+                                    ? listing.price.toLocaleString("en-IN")
+                                    : "0" %>
+                            </b>
+
+                            / night
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+    <% }) %>
+
+</div>

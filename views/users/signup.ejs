@@ -1,0 +1,123 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="row mt-5">
+
+    <div class="col-lg-6 offset-lg-3">
+
+        <div class="form-card">
+
+            <h2>
+                Create your WanderLust account
+            </h2>
+
+            <p class="text-muted">
+                Sign up to explore and share amazing stays.
+            </p>
+
+
+            <form
+                action="/signup"
+                method="POST"
+                class="needs-validation"
+                novalidate
+            >
+
+                <div class="mb-3">
+
+                    <label
+                        for="username"
+                        class="form-label"
+                    >
+                        Username
+                    </label>
+
+                    <input
+                        name="username"
+                        id="username"
+                        type="text"
+                        class="form-control"
+                        minlength="3"
+                        required
+                    >
+
+                    <div class="invalid-feedback">
+                        Please enter a username.
+                    </div>
+
+                </div>
+
+
+                <div class="mb-3">
+
+                    <label
+                        for="email"
+                        class="form-label"
+                    >
+                        Email
+                    </label>
+
+                    <input
+                        name="email"
+                        id="email"
+                        type="email"
+                        class="form-control"
+                        required
+                    >
+
+                    <div class="invalid-feedback">
+                        Please enter a valid email.
+                    </div>
+
+                </div>
+
+
+                <div class="mb-3">
+
+                    <label
+                        for="password"
+                        class="form-label"
+                    >
+                        Password
+                    </label>
+
+                    <input
+                        name="password"
+                        id="password"
+                        type="password"
+                        class="form-control"
+                        minlength="6"
+                        required
+                    >
+
+                    <div class="invalid-feedback">
+                        Password must be at least 6 characters.
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn btn-dark w-100"
+                >
+                    Sign Up
+                </button>
+
+            </form>
+
+
+            <p class="text-center mt-3 mb-0">
+
+                Already have an account?
+
+                <a href="/login">
+                    Login
+                </a>
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
